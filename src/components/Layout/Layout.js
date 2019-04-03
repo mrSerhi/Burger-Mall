@@ -2,7 +2,7 @@ import React from "react";
 import Aux from "../../hoc/Aux";
 import classes from "./Layout.module.css";
 
-const Layout = props => {
+const layout = props => {
   return (
     <Aux>
       <div>Should be included 3 child components</div>
@@ -11,4 +11,4 @@ const Layout = props => {
   );
 };
 
-export default Layout;
+export default layout;
