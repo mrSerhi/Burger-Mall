@@ -39,6 +39,22 @@
   animation: enable 0.3s linear;
 }
 
+.Price {
+  min-width: 350px;
+  padding-bottom: 5px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.5rem;
+  border-bottom: 2px dotted #333;
+}
+
+.PriceNumber {
+  font-family: monospace;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
 @keyframes enable {
   0% {
     transform: scale(1);

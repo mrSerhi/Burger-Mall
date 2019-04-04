@@ -36,15 +36,39 @@ class BuildControls extends Component {
     return null;
   };
 
+  renderPrice = () => {
+    const { price } = this.props;
+
+    if (price > 0) {
+      return (
+        <h4 className={classes.Price}>
+          Total Price:{" "}
+          <span className={classes.PriceNumber}>&#36;{price.toFixed(2)}</span>
+        </h4>
+      );
+    }
+    return (
+      <h4 className={classes.Price}>
+        Total Price: <span className={classes.PriceNumber}>&#36;0</span>
+      </h4>
+    );
+  };
+
   render() {
-    return <div className={classes.BuildControls}>{this.renderControls()}</div>;
+    return (
+      <div className={classes.BuildControls}>
+        {this.renderPrice()}
+        {this.renderControls()}
+      </div>
+    );
   }
 }
 
 BuildControls.propTypes = {
   onAddIngredients: PropTypes.func.isRequired,
   onDeleteIngredients: PropTypes.func.isRequired,
-  disabling: PropTypes.object.isRequired
+  disabling: PropTypes.object.isRequired,
+  price: PropTypes.number.isRequired
 };
 
 export default BuildControls;
