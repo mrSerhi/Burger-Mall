@@ -55,9 +55,13 @@ class BuildControls extends Component {
   };
 
   renderBuy = () => {
-    const { disablingBuyBtn } = this.props;
+    const { disablingBuyBtn, ordered } = this.props;
     return (
-      <button className={classes.OrderButton} disabled={!disablingBuyBtn}>
+      <button
+        onClick={ordered}
+        className={classes.OrderButton}
+        disabled={!disablingBuyBtn}
+      >
         Buy <i className="fas fa-shopping-cart " />
       </button>
     );

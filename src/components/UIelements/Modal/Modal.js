@@ -3,6 +3,10 @@ import React from "react";
 // css module
 import classes from "./Modal.module.css";
 
-const Modal = props => <div className={classes.Modal}>{props.children}</div>;
+const Modal = ({ display, ...props }) => {
+  const renderModal = <div className={classes.Modal}>{props.children}</div>;
+
+  return display ? renderModal : null;
+};
 
 export default Modal;

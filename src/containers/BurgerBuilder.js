@@ -6,6 +6,7 @@ import Aux from "../hoc/Aux";
 import Burger from "../components/Burger/Burger";
 import BuildControls from "../components/Burger/BuildControls/BuildControls";
 import Modal from "../components/UIelements/Modal/Modal";
+import OrderTotal from "../components/Burger/OrderTotal/OrderTotal";
 
 class BurgerBuilder extends Component {
   state = {
@@ -16,7 +17,8 @@ class BurgerBuilder extends Component {
       meat: 0
     },
     totalPrice: 0,
-    allowToBuy: false
+    allowToBuy: false,
+    ordered: false
   };
 
   _INGREDIENT_PRICES = {
@@ -66,6 +68,8 @@ class BurgerBuilder extends Component {
     return;
   };
 
+  handleDisplayModal = () => this.setState({ ordered: true });
+
   setUpBtnDisabling = () => {
     const ingredients = { ...this.state.ingredients };
     // loop each value and set true / false
@@ -76,11 +80,13 @@ class BurgerBuilder extends Component {
   };
 
   render() {
-    const { ingredients, totalPrice, allowToBuy } = this.state;
+    const { ingredients, totalPrice, allowToBuy, ordered } = this.state;
 
     return (
       <Aux>
-        <Modal>Modal</Modal>
+        <Modal display={ordered}>
+          <OrderTotal orders={ingredients} />
+        </Modal>
 
         <Burger ingredients={ingredients} />
 
@@ -90,6 +96,7 @@ class BurgerBuilder extends Component {
           disabling={this.setUpBtnDisabling()}
           disablingBuyBtn={allowToBuy}
           price={totalPrice}
+          ordered={this.handleDisplayModal}
         />
       </Aux>
     );
