@@ -5,6 +5,7 @@ import Aux from "../hoc/Aux";
 // components
 import Burger from "../components/Burger/Burger";
 import BuildControls from "../components/Burger/BuildControls/BuildControls";
+import Modal from "../components/UIelements/Modal/Modal";
 
 class BurgerBuilder extends Component {
   state = {
@@ -79,6 +80,8 @@ class BurgerBuilder extends Component {
 
     return (
       <Aux>
+        <Modal>Modal</Modal>
+
         <Burger ingredients={ingredients} />
 
         <BuildControls
