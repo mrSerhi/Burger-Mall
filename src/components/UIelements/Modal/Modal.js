@@ -3,10 +3,20 @@ import React from "react";
 // css module
 import classes from "./Modal.module.css";
 
-const Modal = ({ display, ...props }) => {
-  const renderModal = <div className={classes.Modal}>{props.children}</div>;
+// components
+import BackDrop from "../BackDrop/BackDrop";
+import Aux from "../../../hoc/Aux";
 
-  return display ? renderModal : null;
+const Modal = ({ display, onHide, ...props }) => {
+  const modalStyleClasses = `animated ${classes.Modal} bounceInDown`;
+  const renderModal = <div className={modalStyleClasses}>{props.children}</div>;
+
+  return display ? (
+    <Aux>
+      <BackDrop hideElem={onHide} />
+      {renderModal}
+    </Aux>
+  ) : null;
 };
 
 export default Modal;

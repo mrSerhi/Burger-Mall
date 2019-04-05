@@ -5,9 +5,9 @@ import React from "react";
 // css module
 import classes from "./CloseBtn.module.css";
 
-const closeBtn = () => {
+const closeBtn = ({ onClose }) => {
   return (
-    <a href="#!" className={classes.CloseButton}>
+    <a onClick={onClose} href="#!" className={classes.CloseButton}>
       <div className={classes.In}>
         <div className={classes.CloseButtonBlock} />
         <div className={classes.CloseButtonBlock} />

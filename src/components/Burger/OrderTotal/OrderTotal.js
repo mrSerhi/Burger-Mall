@@ -7,7 +7,7 @@ import classes from "./OrderTotal.module.css";
 // components
 import CloseBtn from "../../UIelements/CloseBtn/CloseBtn";
 
-const OrderTotal = ({ orders }) => {
+const OrderTotal = ({ orders, onHideElem }) => {
   const renderOrders = () => {
     if (orders) {
       const renderLi = Object.keys(orders).map(key => {
@@ -28,10 +28,10 @@ const OrderTotal = ({ orders }) => {
   return (
     <Aux>
       <div className={classes.Wrapper}>
-        <CloseBtn />
+        <CloseBtn onClose={onHideElem} />
       </div>
       <h3>Total Order</h3>
-      <p>Your order looks like that:</p>
+      <p>Your Burger will consist of:</p>
       {renderOrders()}
       <p>You are satisfied with your ordered ingredients?</p>
     </Aux>
