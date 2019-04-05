@@ -14,7 +14,8 @@ class BurgerBuilder extends Component {
       cheese: 0,
       meat: 0
     },
-    totalPrice: 0
+    totalPrice: 0,
+    allowToBuy: false
   };
 
   _INGREDIENT_PRICES = {
@@ -22,6 +23,16 @@ class BurgerBuilder extends Component {
     bacon: 1.4,
     cheese: 0.7,
     meat: 1.2
+  };
+  // ingredients we should getted then call add or delete handlers
+  UpdateAllowToBuyState = ingredients => {
+    // loop keys -> return value of each ingr and sum that
+    const sumOfingredients = Object.keys(ingredients)
+      .map(ing => ingredients[ing])
+      .reduce((acc, num) => acc + num, 0);
+
+    // set if 0 -> false, 1, 2 ... -> true
+    this.setState({ allowToBuy: !!sumOfingredients });
   };
 
   handleAddingIngredients = type => {
@@ -31,6 +42,8 @@ class BurgerBuilder extends Component {
       (totalPrice + this._INGREDIENT_PRICES[type]).toFixed(2)
     );
     ingredients[type] = ingredients[type] + 1;
+    // updating
+    this.UpdateAllowToBuyState(ingredients);
 
     this.setState({ ingredients, totalPrice: updatedPrice });
   };
@@ -44,6 +57,8 @@ class BurgerBuilder extends Component {
         (totalPrice - this._INGREDIENT_PRICES[type]).toFixed(2)
       );
       ingredients[type] = ingredients[type] > 0 ? ingredients[type] - 1 : 0;
+      // updating
+      this.UpdateAllowToBuyState(ingredients);
 
       this.setState({ ingredients, totalPrice: updatedPrice });
     }
@@ -60,7 +75,7 @@ class BurgerBuilder extends Component {
   };
 
   render() {
-    const { ingredients, totalPrice } = this.state;
+    const { ingredients, totalPrice, allowToBuy } = this.state;
 
     return (
       <Aux>
@@ -70,6 +85,7 @@ class BurgerBuilder extends Component {
           onAddIngredients={this.handleAddingIngredients}
           onDeleteIngredients={this.handleRemovingIngredients}
           disabling={this.setUpBtnDisabling()}
+          disablingBuyBtn={allowToBuy}
           price={totalPrice}
         />
       </Aux>

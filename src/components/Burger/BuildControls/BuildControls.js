@@ -54,11 +54,21 @@ class BuildControls extends Component {
     );
   };
 
+  renderBuy = () => {
+    const { disablingBuyBtn } = this.props;
+    return (
+      <button className={classes.OrderButton} disabled={!disablingBuyBtn}>
+        Buy <i className="fas fa-shopping-cart " />
+      </button>
+    );
+  };
+
   render() {
     return (
       <div className={classes.BuildControls}>
         {this.renderPrice()}
         {this.renderControls()}
+        {this.renderBuy()}
       </div>
     );
   }
@@ -68,7 +78,8 @@ BuildControls.propTypes = {
   onAddIngredients: PropTypes.func.isRequired,
   onDeleteIngredients: PropTypes.func.isRequired,
   disabling: PropTypes.object.isRequired,
-  price: PropTypes.number.isRequired
+  price: PropTypes.number.isRequired,
+  disablingBuyBtn: PropTypes.bool.isRequired
 };
 
 export default BuildControls;
