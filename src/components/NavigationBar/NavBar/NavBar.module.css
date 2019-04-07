@@ -8,9 +8,9 @@
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
-  margin: auto;
-  background: #fc6017;
+  text-align: center;
+  padding: 0 15px;
+  background: #ea2a3d;
   color: #111;
   box-sizing: border-box;
   z-index: 90;
