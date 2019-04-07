@@ -8,7 +8,7 @@ import classes from "./OrderTotal.module.css";
 import CloseBtn from "../../UIelements/CloseBtn/CloseBtn";
 import Button from "../../UIelements/Button/Button";
 
-const OrderTotal = ({ orders, onHideElem, onContinue }) => {
+const OrderTotal = ({ orders, price, onHideElem, onContinue }) => {
   const renderOrders = () => {
     if (orders) {
       const renderLi = Object.keys(orders).map(key => {
@@ -34,6 +34,10 @@ const OrderTotal = ({ orders, onHideElem, onContinue }) => {
       <h3>Total Order</h3>
       <p>Your Burger will consist of:</p>
       {renderOrders()}
+      <p>
+        Total price:{" "}
+        <strong style={{ fontSize: "1.6rem" }}>&#36;{price.toFixed(2)}</strong>
+      </p>
       <p>You are satisfied with your ordered ingredients?</p>
 
       <Button onClicked={onHideElem} btnType="Danger">

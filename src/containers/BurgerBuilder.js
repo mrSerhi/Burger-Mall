@@ -94,6 +94,7 @@ class BurgerBuilder extends Component {
             onHideElem={this.handleHideModal}
             onContinue={this.handleContinueModal}
             orders={ingredients}
+            price={totalPrice}
           />
         </Modal>
 
