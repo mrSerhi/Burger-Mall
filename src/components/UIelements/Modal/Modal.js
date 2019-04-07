@@ -1,4 +1,5 @@
 import React from "react";
+// import PropTypes from 'prop-types'
 
 // css module
 import classes from "./Modal.module.css";
@@ -7,14 +8,13 @@ import classes from "./Modal.module.css";
 import BackDrop from "../BackDrop/BackDrop";
 import Aux from "../../../hoc/Aux";
 
-const Modal = ({ display, onHide, ...props }) => {
+const Modal = ({ display = false, onHide, ...props }) => {
   const modalStyleClasses = `animated ${classes.Modal} bounceInDown`;
-  const renderModal = <div className={modalStyleClasses}>{props.children}</div>;
 
   return display ? (
     <Aux>
       <BackDrop hideElem={onHide} />
-      {renderModal}
+      <div className={modalStyleClasses}>{props.children}</div>
     </Aux>
   ) : null;
 };

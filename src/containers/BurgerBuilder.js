@@ -73,6 +73,7 @@ class BurgerBuilder extends Component {
     e.preventDefault();
     this.setState({ ordered: false });
   };
+  handleContinueModal = () => alert("You will continue");
 
   setUpBtnDisabling = () => {
     const ingredients = { ...this.state.ingredients };
@@ -89,7 +90,11 @@ class BurgerBuilder extends Component {
     return (
       <Aux>
         <Modal onHide={this.handleHideModal} display={ordered}>
-          <OrderTotal onHideElem={this.handleHideModal} orders={ingredients} />
+          <OrderTotal
+            onHideElem={this.handleHideModal}
+            onContinue={this.handleContinueModal}
+            orders={ingredients}
+          />
         </Modal>
 
         <Burger ingredients={ingredients} />

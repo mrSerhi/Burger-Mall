@@ -6,8 +6,9 @@ import Aux from "../../../hoc/Aux";
 import classes from "./OrderTotal.module.css";
 // components
 import CloseBtn from "../../UIelements/CloseBtn/CloseBtn";
+import Button from "../../UIelements/Button/Button";
 
-const OrderTotal = ({ orders, onHideElem }) => {
+const OrderTotal = ({ orders, onHideElem, onContinue }) => {
   const renderOrders = () => {
     if (orders) {
       const renderLi = Object.keys(orders).map(key => {
@@ -34,12 +35,21 @@ const OrderTotal = ({ orders, onHideElem }) => {
       <p>Your Burger will consist of:</p>
       {renderOrders()}
       <p>You are satisfied with your ordered ingredients?</p>
+
+      <Button onClicked={onHideElem} btnType="Danger">
+        Cansel
+      </Button>
+
+      <Button onClicked={onContinue} btnType="Success">
+        Continue
+      </Button>
     </Aux>
   );
 };
 
 OrderTotal.propTypes = {
-  orders: PropTypes.object.isRequired
+  orders: PropTypes.object.isRequired,
+  onHideElem: PropTypes.func.isRequired
 };
 
 export default OrderTotal;
