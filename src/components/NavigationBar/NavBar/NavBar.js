@@ -5,6 +5,7 @@ import classes from "./NavBar.module.css";
 
 // components
 import Logo from "../../Logo/Logo";
+import Navigation from "../Navigation/Navigation";
 
 const navBar = props => {
   return (
@@ -13,7 +14,7 @@ const navBar = props => {
 
       <Logo />
 
-      <nav>nav items...</nav>
+      <Navigation />
     </div>
   );
 };
