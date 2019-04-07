@@ -1,28 +1,50 @@
 .Item {
   height: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  text-align: center;
+  width: 100%;
+  margin: 0.5rem auto;
   background: transparent;
+  list-style: none;
 }
 
 .Item > a {
   display: block;
   height: 100%;
-  padding: 1rem 0.5rem;
   text-decoration: none;
-  color: #fff;
+  color: #111;
   border-bottom: 4px solid transparent;
   transition: all 0.3s linear;
 }
 
 .Item > a:hover,
 .Item > a:active {
-  background: #f1727f;
-  border-bottom: 4px solid #ff4500;
+  color: #ff4500;
 }
 
 .Item > a.Active {
   border-bottom: 4px solid #1ac8db;
+}
+
+@media (min-width: 500px) {
+  .Item {
+    width: auto;
+    flex-flow: row nowrap;
+    align-items: center;
+    text-align: center;
+  }
+
+  .Item > a {
+    padding: 1rem 0.5rem;
+    color: #fff;
+  }
+
+  .Item > a:hover,
+  .Item > a:active {
+    color: #fff;
+    background: #f1727f;
+    border-bottom: 4px solid #ff4500;
+  }
+
+  .Item > a.Active {
+    border-bottom: 4px solid #1ac8db;
+  }
 }

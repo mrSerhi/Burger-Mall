@@ -1,0 +1,31 @@
+.SideDrow {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 300px;
+  max-width: 70%;
+  height: 100%;
+  padding: 40px 20px;
+  background: #fff;
+  z-index: 200;
+  transition: transform 0.3s ease-out;
+}
+
+.Logo {
+  height: 12%;
+  margin-bottom: 1rem;
+}
+
+.Open {
+  transform: translateX(0);
+}
+
+.Close {
+  transform: translateX(-100%);
+}
+
+@media (min-width: 500px) {
+  .SideDrow {
+    display: none;
+  }
+}

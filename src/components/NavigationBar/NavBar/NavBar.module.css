@@ -19,3 +19,9 @@
 .NavBar nav {
   height: 100%;
 }
+
+@media (max-width: 500px) {
+  .HideNavOnModile {
+    display: none;
+  }
+}

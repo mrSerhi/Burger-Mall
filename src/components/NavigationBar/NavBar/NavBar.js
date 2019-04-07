@@ -14,7 +14,9 @@ const navBar = props => {
 
       <Logo />
 
-      <Navigation />
+      <div className={classes.HideNavOnModile}>
+        <Navigation />
+      </div>
     </div>
   );
 };
