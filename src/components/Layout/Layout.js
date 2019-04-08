@@ -8,19 +8,29 @@ import SideDrower from "../NavigationBar/SideDrow/SideDrow";
 
 class Layout extends Component {
   state = {
-    opend: true
+    opend: false
   };
 
   handleOpeningSideDrower = () => {
     this.setState({ opend: false });
   };
 
+  handleTogglingNavBarMenu = () => {
+    this.setState(({ opend }) => {
+      return { opend: !opend };
+    });
+  };
+
   render() {
+    const { opend } = this.state;
     return (
       <Aux>
-        <NavBar />
+        <NavBar
+          openPhase={opend}
+          onToggleMenu={this.handleTogglingNavBarMenu}
+        />
         <SideDrower
-          opend={this.state.opend}
+          opend={opend}
           onOpeningSideDrower={this.handleOpeningSideDrower}
         />
         <main className={classes.Content}>{this.props.children}</main>

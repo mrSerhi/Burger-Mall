@@ -24,4 +24,9 @@
   .HideNavOnModile {
     display: none;
   }
+
+  .NavBar {
+    flex-flow: row-reverse nowrap;
+    justify-content: flex-end;
+  }
 }

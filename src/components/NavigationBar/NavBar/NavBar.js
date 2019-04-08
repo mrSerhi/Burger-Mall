@@ -6,11 +6,12 @@ import classes from "./NavBar.module.css";
 // components
 import Logo from "../../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
+import NavBarMenuBtn from "../NavBarMenuBtn/NavBarMenuBtn";
 
-const navBar = props => {
+const navBar = ({ openPhase, onToggleMenu }) => {
   return (
     <div className={classes.NavBar}>
-      <div>Menu</div>
+      <NavBarMenuBtn nextView={openPhase} onToggle={onToggleMenu} />
 
       <Logo />
 
