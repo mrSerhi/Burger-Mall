@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import Aux from "../../hoc/Aux";
 import classes from "./Layout.module.css";
 
@@ -6,15 +6,27 @@ import classes from "./Layout.module.css";
 import NavBar from "../NavigationBar/NavBar/NavBar";
 import SideDrower from "../NavigationBar/SideDrow/SideDrow";
 
-const layout = props => {
-  return (
-    <Aux>
-      {/* <div>Should be included 3 child components</div> */}
-      <NavBar />
-      <SideDrower />
-      <main className={classes.Content}>{props.children}</main>
-    </Aux>
-  );
-};
+class Layout extends Component {
+  state = {
+    opend: true
+  };
 
-export default layout;
+  handleOpeningSideDrower = () => {
+    this.setState({ opend: false });
+  };
+
+  render() {
+    return (
+      <Aux>
+        <NavBar />
+        <SideDrower
+          opend={this.state.opend}
+          onOpeningSideDrower={this.handleOpeningSideDrower}
+        />
+        <main className={classes.Content}>{this.props.children}</main>
+      </Aux>
+    );
+  }
+}
+
+export default Layout;

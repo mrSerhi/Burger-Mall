@@ -13,7 +13,7 @@ const Modal = ({ display = false, onHide, ...props }) => {
 
   return display ? (
     <Aux>
-      <BackDrop hideElem={onHide} />
+      <BackDrop showPhase={display} hideElem={onHide} />
       <div className={modalStyleClasses}>{props.children}</div>
     </Aux>
   ) : null;
