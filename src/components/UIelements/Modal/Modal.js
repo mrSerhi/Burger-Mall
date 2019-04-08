@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 // import PropTypes from 'prop-types'
 
 // css module
@@ -8,15 +8,27 @@ import classes from "./Modal.module.css";
 import BackDrop from "../BackDrop/BackDrop";
 import Aux from "../../../hoc/Aux";
 
-const Modal = ({ display = false, onHide, ...props }) => {
-  const modalStyleClasses = `animated ${classes.Modal} bounceInDown`;
+class Modal extends Component {
+  // prevent updating component and childrens then props is equals
+  shouldComponentUpdate(nextProp, nextState) {
+    // return true -> allow to update, else -> to skip the whole rendering process
+    return nextProp.display !== this.props.display;
+  }
 
-  return display ? (
-    <Aux>
-      <BackDrop showPhase={display} hideElem={onHide} />
-      <div className={modalStyleClasses}>{props.children}</div>
-    </Aux>
-  ) : null;
-};
+  componentWillUpdate() {
+    console.log("[Module is update]");
+  }
+
+  render() {
+    const modalStyleClasses = `animated ${classes.Modal} bounceInDown`;
+    const { display = false, onHide } = this.props;
+    return display ? (
+      <Aux>
+        <BackDrop showPhase={display} hideElem={onHide} />
+        <div className={modalStyleClasses}>{this.props.children}</div>
+      </Aux>
+    ) : null;
+  }
+}
 
 export default Modal;
