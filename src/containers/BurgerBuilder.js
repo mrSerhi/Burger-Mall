@@ -8,6 +8,7 @@ import Burger from "../components/Burger/Burger";
 import BuildControls from "../components/Burger/BuildControls/BuildControls";
 import Modal from "../components/UIelements/Modal/Modal";
 import OrderTotal from "../components/Burger/OrderTotal/OrderTotal";
+import Spinner from "../components/UIelements/Spinner/Spinner";
 
 class BurgerBuilder extends Component {
   state = {
@@ -19,7 +20,8 @@ class BurgerBuilder extends Component {
     },
     totalPrice: 0,
     allowToBuy: false,
-    ordered: false
+    modalPhase: false,
+    loading: false
   };
 
   _INGREDIENT_PRICES = {
@@ -69,12 +71,16 @@ class BurgerBuilder extends Component {
     return;
   };
 
-  handleDisplayModal = () => this.setState({ ordered: true });
+  handleDisplayModal = () => this.setState({ modalPhase: true });
   handleHideModal = e => {
     e.preventDefault();
-    this.setState({ ordered: false });
+    this.setState({ modalPhase: false });
   };
-  handleContinueModalRequest = async () => {
+  // handle sending request to the server
+  handleSendingOrder = async () => {
+    // loading phase
+    this.setState({ loading: true });
+
     // 1. create the obj with data for sending on server
     const data = {
       ingredients: this.state.ingredients,
@@ -92,8 +98,13 @@ class BurgerBuilder extends Component {
     };
 
     // 2. Call axios and send data to the server
-    const response = await axios.post("/orders.json", data);
-    console.log(response);
+    try {
+      await axios.post("/orders.json", data);
+      this.setState({ loading: false, modalPhase: false });
+    } catch (ex) {
+      this.setState({ loading: false, modalPhase: false });
+      console.error("Response is failed...", ex);
+    }
   };
 
   setUpBtnDisabling = () => {
@@ -105,18 +116,28 @@ class BurgerBuilder extends Component {
     return ingredients;
   };
 
+  renderOrderTotal = () => {
+    const { ingredients, totalPrice, loading } = this.state;
+
+    if (loading) return <Spinner />;
+
+    return (
+      <OrderTotal
+        onHideElem={this.handleHideModal}
+        onContinue={this.handleSendingOrder}
+        orders={ingredients}
+        price={totalPrice}
+      />
+    );
+  };
+
   render() {
-    const { ingredients, totalPrice, allowToBuy, ordered } = this.state;
+    const { ingredients, totalPrice, allowToBuy, modalPhase } = this.state;
 
     return (
       <Aux>
-        <Modal onHide={this.handleHideModal} display={ordered}>
-          <OrderTotal
-            onHideElem={this.handleHideModal}
-            onContinue={this.handleContinueModalRequest}
-            orders={ingredients}
-            price={totalPrice}
-          />
+        <Modal onHide={this.handleHideModal} display={modalPhase}>
+          {this.renderOrderTotal()}
         </Modal>
 
         <Burger ingredients={ingredients} />
@@ -127,7 +148,7 @@ class BurgerBuilder extends Component {
           disabling={this.setUpBtnDisabling()}
           disablingBuyBtn={allowToBuy}
           price={totalPrice}
-          ordered={this.handleDisplayModal}
+          onTogglingModal={this.handleDisplayModal}
         />
       </Aux>
     );

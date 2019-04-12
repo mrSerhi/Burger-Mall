@@ -10,9 +10,11 @@ import Aux from "../../../hoc/Aux";
 
 class Modal extends Component {
   // prevent updating component and childrens then props is equals
-  shouldComponentUpdate(nextProp, nextState) {
+  shouldComponentUpdate(nextProps, nextState) {
+    const { display, children } = this.props;
+
     // return true -> allow to update, else -> to skip the whole rendering process
-    return nextProp.display !== this.props.display;
+    return nextProps.display !== display || nextProps.children !== children;
   }
 
   componentWillUpdate() {
