@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 // css module
 import classes from "./BackDrop.module.css";
 
-const BackDrop = ({ showPhase, hideElem }) => {
+const BackDrop = ({ display, hideElem }) => {
   const showElem = {
-    display: showPhase ? "" : "none"
+    display: display ? "" : "none"
   };
   return (
     <div onClick={hideElem} style={showElem} className={classes.Backdrop} />
@@ -14,8 +14,8 @@ const BackDrop = ({ showPhase, hideElem }) => {
 };
 
 BackDrop.propTypes = {
-  hideElem: PropTypes.func.isRequired,
-  showPhase: PropTypes.bool.isRequired
+  hideElem: PropTypes.func.isRequired
+  // display: PropTypes.bool.isRequired
 };
 
 export default BackDrop;

@@ -26,7 +26,7 @@ class Modal extends Component {
     const { display = false, onHide } = this.props;
     return display ? (
       <Aux>
-        <BackDrop showPhase={display} hideElem={onHide} />
+        <BackDrop display={display} hideElem={onHide} />
         <div className={modalStyleClasses}>{this.props.children}</div>
       </Aux>
     ) : null;

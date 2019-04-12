@@ -3,6 +3,7 @@ import axios from "../axios-orders";
 
 // HOC
 import Aux from "../hoc/Aux";
+import errrorHandler from "../hoc/errorHandler";
 // components
 import Burger from "../components/Burger/Burger";
 import BuildControls from "../components/Burger/BuildControls/BuildControls";
@@ -155,4 +156,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder;
+export default errrorHandler(BurgerBuilder, axios);
