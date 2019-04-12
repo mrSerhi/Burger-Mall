@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "../axios-orders";
 
 // HOC
 import Aux from "../hoc/Aux";
@@ -73,7 +74,27 @@ class BurgerBuilder extends Component {
     e.preventDefault();
     this.setState({ ordered: false });
   };
-  handleContinueModal = () => alert("You will continue");
+  handleContinueModalRequest = async () => {
+    // 1. create the obj with data for sending on server
+    const data = {
+      ingredients: this.state.ingredients,
+      price: this.state.totalPrice,
+      customer: {
+        name: "Villy",
+        address: {
+          country: "Ukraine",
+          zipcode: "063097",
+          street: "Bulsheet 69"
+        },
+        email: "fuckOf.villy@gmail.com"
+      },
+      deliveryMethod: "fast"
+    };
+
+    // 2. Call axios and send data to the server
+    const response = await axios.post("/orders.json", data);
+    console.log(response);
+  };
 
   setUpBtnDisabling = () => {
     const ingredients = { ...this.state.ingredients };
@@ -92,7 +113,7 @@ class BurgerBuilder extends Component {
         <Modal onHide={this.handleHideModal} display={ordered}>
           <OrderTotal
             onHideElem={this.handleHideModal}
-            onContinue={this.handleContinueModal}
+            onContinue={this.handleContinueModalRequest}
             orders={ingredients}
             price={totalPrice}
           />
