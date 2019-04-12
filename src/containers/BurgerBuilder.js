@@ -27,7 +27,7 @@ class BurgerBuilder extends Component {
     cheese: 0.7,
     meat: 1.2
   };
-  // ingredients we should getted then call add or delete handlers
+  // ingredients we should get then call add or delete handlers
   UpdateAllowToBuyState = ingredients => {
     // loop keys -> return value of each ingr and sum that
     const sumOfingredients = Object.keys(ingredients)
