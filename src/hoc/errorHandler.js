@@ -1,4 +1,4 @@
-// HOC which handle recives errors than working with the server
+// HOC which handle received errors than working with the server
 import React, { Component } from "react";
 import Modal from "../components/UIelements/Modal/Modal";
 import Aux from "./Aux";
@@ -7,20 +7,23 @@ const errrorHandler = (WrappedComponent, axios) => {
   return class extends Component {
     state = { error: null };
 
-    // *WillMount because should setup interceptors before components will be rendered
-    componentWillMount() {
-      // Unexpacted error(network down, db down, bug)
-      axios.interceptors.request.use(req => {
-        this.setState({ error: null });
-        return req;
-      });
-      // Expacted errors(Clients)
-      axios.interceptors.response.use(
-        res => res,
-        error => {
-          this.setState({ error });
-        }
-      );
+    // Unexpacted error(network down, db down, bug)
+    reqInterceptor = axios.interceptors.request.use(req => {
+      this.setState({ error: null });
+      return req;
+    });
+    // Expacted errors(Clients)
+    resInterceptor = axios.interceptors.response.use(
+      res => res,
+      error => {
+        this.setState({ error });
+      }
+    );
+
+    // clear interceptors for prevent using much more than it's needed
+    componentWillUnmount() {
+      axios.interceptors.request.eject(this.reqInterceptor);
+      axios.interceptors.response.eject(this.resInterceptor);
     }
 
     handleCloseModal = () => this.setState({ error: null });

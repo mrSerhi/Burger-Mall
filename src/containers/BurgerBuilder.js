@@ -36,7 +36,7 @@ class BurgerBuilder extends Component {
       this.setState({ ingredients: data });
     } catch (ex) {
       this.setState({ error: ex });
-      console.error("BurgerBuilder exaption", ex);
+      console.error("BurgerBuilder exaption: ", ex);
     }
   }
 
