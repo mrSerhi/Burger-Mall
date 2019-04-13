@@ -13,16 +13,12 @@ import Spinner from "../components/UIelements/Spinner/Spinner";
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: {
-      salad: 0,
-      bacon: 0,
-      cheese: 0,
-      meat: 0
-    },
+    ingredients: null,
     totalPrice: 0,
     allowToBuy: false,
     modalPhase: false,
-    loading: false
+    loading: false,
+    error: null
   };
 
   _INGREDIENT_PRICES = {
@@ -31,6 +27,19 @@ class BurgerBuilder extends Component {
     cheese: 0.7,
     meat: 1.2
   };
+
+  async componentDidMount() {
+    try {
+      // call the server
+      const { data } = await axios.get("/ingredients.json");
+
+      this.setState({ ingredients: data });
+    } catch (ex) {
+      this.setState({ error: ex });
+      console.error("BurgerBuilder exaption", ex);
+    }
+  }
+
   // ingredients we should get then call add or delete handlers
   UpdateAllowToBuyState = ingredients => {
     // loop keys -> return value of each ingr and sum that
@@ -126,21 +135,19 @@ class BurgerBuilder extends Component {
       <OrderTotal
         onHideElem={this.handleHideModal}
         onContinue={this.handleSendingOrder}
-        orders={ingredients}
+        orders={ingredients ? ingredients : {}}
         price={totalPrice}
       />
     );
   };
 
-  render() {
-    const { ingredients, totalPrice, allowToBuy, modalPhase } = this.state;
+  renderBurgerBody = () => {
+    const { ingredients, allowToBuy, totalPrice } = this.state;
+
+    if (!ingredients) return <Spinner />;
 
     return (
       <Aux>
-        <Modal onHide={this.handleHideModal} display={modalPhase}>
-          {this.renderOrderTotal()}
-        </Modal>
-
         <Burger ingredients={ingredients} />
 
         <BuildControls
@@ -151,6 +158,26 @@ class BurgerBuilder extends Component {
           price={totalPrice}
           onTogglingModal={this.handleDisplayModal}
         />
+      </Aux>
+    );
+  };
+
+  render() {
+    const { error, modalPhase } = this.state;
+    const renderErrorMessage = (
+      <h3>
+        Error: The burger don't recive ingredients from the server...Try to
+        reload page
+      </h3>
+    );
+
+    return (
+      <Aux>
+        <Modal onHide={this.handleHideModal} display={modalPhase}>
+          {this.renderOrderTotal()}
+        </Modal>
+
+        {error ? renderErrorMessage : this.renderBurgerBody()}
       </Aux>
     );
   }

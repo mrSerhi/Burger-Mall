@@ -7,7 +7,8 @@ const errrorHandler = (WrappedComponent, axios) => {
   return class extends Component {
     state = { error: null };
 
-    componentDidMount() {
+    // *WillMount because should setup interceptors before components will be rendered
+    componentWillMount() {
       // Unexpacted error(network down, db down, bug)
       axios.interceptors.request.use(req => {
         this.setState({ error: null });
