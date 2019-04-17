@@ -9,7 +9,7 @@ import BurgerIngredients from "./BurgerIngredients/BurgerIngredients";
 const Burger = ({ ingredients }) => {
   // rendering ingredients
   const render = Object.keys(ingredients).map(key => {
-    const arraysOfValuesInArray = [...Array(ingredients[key])]; // ex: [[undefined], [undefined], [undefined, undefined], ...]
+    const arraysOfValuesInArray = [...Array(+ingredients[key])]; // ex: [[undefined], [undefined], [undefined, undefined], ...]
 
     // _ no lodash, it's set to _ because not used
     const transforms = arraysOfValuesInArray.map((_, index) => {

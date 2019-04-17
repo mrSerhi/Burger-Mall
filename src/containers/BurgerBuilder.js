@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "../axios-orders";
+import queryString from "query-string";
 
 // HOC
 import Aux from "../hoc/Aux";
@@ -32,8 +33,16 @@ class BurgerBuilder extends Component {
     try {
       // call the server
       const { data } = await axios.get("/ingredients.json");
+      const { salad, bacon, cheese, meat } = data;
 
-      this.setState({ ingredients: data });
+      this.setState({
+        ingredients: {
+          salad,
+          bacon,
+          cheese,
+          meat
+        }
+      });
     } catch (ex) {
       this.setState({ error: ex });
       console.error("BurgerBuilder exaption: ", ex);
@@ -109,10 +118,16 @@ class BurgerBuilder extends Component {
 
     // 2. Call axios and send data to the server
     try {
-      await axios.post("/orders.json", data);
+      // use lib to convert obj to the search string
+      const searchQuery = queryString.stringify(this.state.ingredients);
+
+      // await axios.post("/orders.json", data);
       this.setState({ loading: false, modalPhase: false });
-      // go ahead on a new route
-      this.props.history.push("/orders/checkout");
+      // go ahead on a new route and push ingredients like a search query
+      this.props.history.push({
+        pathname: "/orders/checkout",
+        search: `?${searchQuery}`
+      });
     } catch (ex) {
       this.setState({ loading: false, modalPhase: false });
       console.error("Response is failed...", ex);

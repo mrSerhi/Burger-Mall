@@ -6,7 +6,7 @@ import Button from "../../UIelements/Button/Button";
 // css module
 import classes from "./OrdersTotal.module.css";
 
-const OrdersTotal = ({ ingredients }) => {
+const OrdersTotal = ({ ingredients, onCansel }) => {
   return (
     <div className={classes.OrdersTotal}>
       <h1>Bon appetit!</h1>
@@ -14,7 +14,7 @@ const OrdersTotal = ({ ingredients }) => {
         <Burger ingredients={ingredients} />
       </div>
 
-      <Button btnType="Danger" onClicked={() => alert("Cansel")}>
+      <Button btnType="Danger" onClicked={onCansel}>
         Cansel
       </Button>
       <Button btnType="Success" onClicked={() => alert("Buy!")}>
