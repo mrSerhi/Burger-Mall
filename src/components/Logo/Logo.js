@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // css modules
 import classes from "./Logo.module.css";
@@ -9,7 +10,9 @@ import BurgerLogo from "../../assets/images/Logo/burger.svg";
 const logo = () => {
   return (
     <div className={classes.Logo}>
-      <img src={BurgerLogo} alt="Burger-logo" />
+      <Link to="/">
+        <img src={BurgerLogo} alt="Burger-logo" />
+      </Link>
     </div>
   );
 };

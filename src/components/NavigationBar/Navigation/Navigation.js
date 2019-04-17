@@ -10,10 +10,12 @@ const navigation = () => {
   return (
     <nav className={classes.Nav}>
       <ul>
-        <NavItems path="/" active>
-          Builder Burger
+        <NavItems exact path="/">
+          <i className="fas fa-hamburger" /> Burger
         </NavItems>
-        <NavItems path="/">Checkout</NavItems>
+        <NavItems path="/orders/checkout">
+          Orders <i className="fas fa-shopping-bag" />
+        </NavItems>
       </ul>
     </nav>
   );

@@ -1,0 +1,26 @@
+.OrdersTotal {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.OrdersTotal h1 {
+  font-size: 1.2rem;
+  letter-spacing: 0.5rem;
+  color: #ea2a3d;
+}
+
+.OrdersTotal .Burger {
+  width: 100%;
+  margin: auto;
+}
+
+@media (min-width: 600px) {
+  .OrdersTotal {
+    width: 500px;
+  }
+
+  .OrdersTotal h1 {
+    font-size: 2.3rem;
+  }
+}

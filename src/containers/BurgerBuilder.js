@@ -111,6 +111,8 @@ class BurgerBuilder extends Component {
     try {
       await axios.post("/orders.json", data);
       this.setState({ loading: false, modalPhase: false });
+      // go ahead on a new route
+      this.props.history.push("/orders/checkout");
     } catch (ex) {
       this.setState({ loading: false, modalPhase: false });
       console.error("Response is failed...", ex);

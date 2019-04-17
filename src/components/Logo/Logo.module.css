@@ -4,6 +4,7 @@
   padding: 6px;
 }
 
-.Logo > img {
+.Logo a,
+.Logo img {
   height: 100%;
 }

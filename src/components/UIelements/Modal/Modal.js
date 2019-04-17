@@ -17,10 +17,6 @@ class Modal extends Component {
     return nextProps.display !== display || nextProps.children !== children;
   }
 
-  componentWillUpdate() {
-    // console.log("[Module is update]");
-  }
-
   render() {
     const modalStyleClasses = `animated ${classes.Modal} bounceInDown`;
     const { display = false, onHide } = this.props;
