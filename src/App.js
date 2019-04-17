@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // components
 import Layout from "./components/Layout/Layout";
 import BurgerBuilder from "./containers/BurgerBuilder";
-import CheckoutTotal from "./containers/CheckoutTotalOrders";
+import CheckoutTotal from "./containers/CheckoutTotal/CheckoutTotalOrders";
 
 class App extends Component {
   render() {

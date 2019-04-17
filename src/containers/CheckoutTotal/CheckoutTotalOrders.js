@@ -1,8 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import { Route } from "react-router-dom";
 import queryString from "query-string";
 
 // components
 import OrdersTotal from "../../components/Pages/Orders/OrdersTotal";
+import ContactData from "./ContactData/ContactData";
 
 class CheckoutTotal extends Component {
   state = {
@@ -19,14 +21,24 @@ class CheckoutTotal extends Component {
   handleCanselClick = () => {
     this.props.history.goBack();
   };
-  handleBuyClick = () => {};
+  handleOrderingClick = () => {
+    this.props.history.replace("/orders/checkout/contact_data");
+  };
 
   render() {
     return (
-      <OrdersTotal
-        onCansel={this.handleCanselClick}
-        ingredients={this.state.ingredients}
-      />
+      <Fragment>
+        <OrdersTotal
+          onCansel={this.handleCanselClick}
+          onOrder={this.handleOrderingClick}
+          ingredients={this.state.ingredients}
+        />
+
+        <Route
+          path={this.props.match.path + "/contact_data"}
+          component={ContactData}
+        />
+      </Fragment>
     );
   }
 }

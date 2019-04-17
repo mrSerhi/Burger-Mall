@@ -1,0 +1,77 @@
+.ContactData {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .ContactData {
+    width: 500px;
+  }
+}
+
+/* form */
+.Form {
+  font-family: "Open Sans Condensed", arial, sans;
+  width: 100%;
+  padding: 30px;
+  background: #fff;
+  margin: 50px auto;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+}
+.Form h2 {
+  background: orange;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 100;
+  padding: 20px;
+  margin: -30px -30px 30px -30px;
+}
+.Form input[type="text"],
+.Form input[type="date"],
+.Form input[type="datetime"],
+.Form input[type="email"],
+.Form input[type="number"],
+.Form input[type="search"],
+.Form input[type="time"],
+.Form input[type="url"],
+.Form input[type="password"],
+.Form textarea,
+.Form select {
+  outline: none;
+  display: block;
+  width: 100%;
+  padding: 7px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  background: transparent;
+  margin-bottom: 10px;
+  font: 16px Arial, Helvetica, sans-serif;
+  height: 45px;
+  text-align: center;
+}
+.Form textarea {
+  resize: none;
+  overflow: hidden;
+}
+.Form input[type="button"],
+.Form input[type="submit"],
+.Form button[type="submit"] {
+  box-shadow: inset 0px 1px 0px 0px #ea2a3d;
+  background-color: #ea2a3d;
+  border: 1px solid #df283a;
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  padding: 8px 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.Form input[type="button"]:hover,
+.Form input[type="submit"]:hover,
+.Form button[type="submit"]:hover {
+  background: linear-gradient(to bottom, #ea2a3d 5%, #f52f43 100%);
+  background-color: #eb2a3d;
+}
