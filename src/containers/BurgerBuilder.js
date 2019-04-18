@@ -97,10 +97,7 @@ class BurgerBuilder extends Component {
   };
   // handle sending request to the server
   handleSendingOrder = async () => {
-    // loading phase
-    this.setState({ loading: true });
-
-    // 1. create the obj with data for sending on server
+    /*
     const data = {
       ingredients: this.state.ingredients,
       price: this.state.totalPrice,
@@ -115,23 +112,20 @@ class BurgerBuilder extends Component {
       },
       deliveryMethod: "fast"
     };
+  */
 
-    // 2. Call axios and send data to the server
-    try {
-      // use lib to convert obj to the search string
-      const searchQuery = queryString.stringify(this.state.ingredients);
+    // use lib to convert obj to the search string
+    const data = {
+      ...this.state.ingredients,
+      totalPrice: this.state.totalPrice
+    };
+    const searchQuery = queryString.stringify(data);
 
-      // await axios.post("/orders.json", data);
-      this.setState({ loading: false, modalPhase: false });
-      // go ahead on a new route and push ingredients like a search query
-      this.props.history.push({
-        pathname: "/orders/checkout",
-        search: `?${searchQuery}`
-      });
-    } catch (ex) {
-      this.setState({ loading: false, modalPhase: false });
-      console.error("Response is failed...", ex);
-    }
+    // go ahead on a new route and push ingredients like a search query
+    this.props.history.push({
+      pathname: "/orders/checkout",
+      search: `?${searchQuery}`
+    });
   };
 
   setUpBtnDisabling = () => {
