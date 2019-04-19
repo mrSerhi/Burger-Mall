@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import queryString from "query-string";
 
 // components
-import OrdersTotal from "../../components/Pages/Orders/OrdersTotal";
+import OrdersTotal from "../../components/ForPages/Orders/OrdersTotal";
 import ContactData from "./ContactData/ContactData";
 import Spinner from "../../components/UIelements/Spinner/Spinner";
 

@@ -14,7 +14,10 @@ const navigation = () => {
           <i className="fas fa-hamburger" /> Burger
         </NavItems>
         <NavItems path="/orders/checkout">
-          Orders <i className="fas fa-shopping-bag" />
+          Checkout <i className="fas fa-clipboard-check" />
+        </NavItems>
+        <NavItems path="/orders/orders_busket">
+          Busket <i className="fas fa-shopping-bag" />
         </NavItems>
       </ul>
     </nav>
