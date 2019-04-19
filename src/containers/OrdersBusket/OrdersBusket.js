@@ -4,6 +4,7 @@ import axios from "../../axios-orders";
 // components
 import OrdersForBusket from "../../components/ForPages/OrdersForBusket/Orders";
 import errrorHandler from "../../hoc/errorHandler";
+import Spinner from "../../components/UIelements/Spinner/Spinner";
 
 class OrdersBusket extends Component {
   state = {
@@ -27,14 +28,23 @@ class OrdersBusket extends Component {
       console.error("Not receives data: ", ex.message);
     }
   }
+  // helper render React Elements
+  renderingOrders = () => {
+    return this.state.orders.map(({ id, ingredients, totalPrice }, index) => {
+      return (
+        <OrdersForBusket
+          key={id}
+          ingredients={ingredients}
+          price={totalPrice}
+          orderNum={index + 1}
+        />
+      );
+    });
+  };
 
   render() {
-    return (
-      <div className="div">
-        <OrdersForBusket />
-        <OrdersForBusket />
-      </div>
-    );
+    const { loading } = this.state;
+    return !loading ? this.renderingOrders() : <Spinner />;
   }
 }
 

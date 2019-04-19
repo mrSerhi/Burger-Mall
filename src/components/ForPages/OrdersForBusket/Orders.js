@@ -1,37 +1,41 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import classes from "./Orders.module.css";
 
-const OrdersForBusket = () => {
+const OrdersForBusket = ({ ingredients, price, orderNum }) => {
+  const mapIngredients = Object.keys(ingredients).map(key => {
+    return (
+      <li key={key}>
+        {key}
+        <span>{ingredients[key]}</span>
+      </li>
+    );
+  });
+
   return (
     <div className={classes.Orders}>
       <h3>
-        Order <span>№1</span>
+        Order <span>№{orderNum}</span>
       </h3>
+
       <div className={classes.Ingredients}>
         <h4>Ingredients: </h4>
 
-        <ul>
-          <li>
-            Salad <span>4</span>
-          </li>
-          <li>
-            Becon <span>4</span>
-          </li>
-          <li>
-            Cheese <span>1</span>
-          </li>
-          <li>
-            Meat <span>2</span>
-          </li>
-        </ul>
+        <ul>{mapIngredients}</ul>
       </div>
 
       <p className={classes.Price}>
-        Price: &#36;<span>2.44</span>
+        Price: &#36;<span>{parseFloat(price).toFixed(2)}</span>
       </p>
     </div>
   );
+};
+
+OrdersForBusket.propTypes = {
+  ingredients: PropTypes.object.isRequired,
+  price: PropTypes.number.isRequired,
+  orderNum: PropTypes.number.isRequired
 };
 
 export default OrdersForBusket;
