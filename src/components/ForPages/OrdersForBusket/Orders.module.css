@@ -1,0 +1,142 @@
+/* first mobile */
+.Orders {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #e7e7e7;
+  border: 1px solid #e7e7e7;
+  border-radius: 4px;
+}
+
+.Orders h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+}
+
+.Orders h3 > span {
+  background: #ea2a3d;
+  padding: 0.3rem;
+  border: 1px solid inherit;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.Orders .Ingredients {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Orders .Ingredients h4 {
+  align-self: center;
+  margin-bottom: 0;
+  font-size: 1rem;
+  color: #ea2a3d;
+}
+
+.Orders .Ingredients ul {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.Orders .Ingredients ul li {
+  width: 100%;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  color: #111;
+  background: orange;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.Orders .Ingredients ul li > span {
+  align-self: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: serif;
+}
+
+.Orders .Price {
+  display: inline-block;
+  margin: 0;
+  padding-bottom: 0.5rem;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #111;
+}
+
+.Orders .Price > span {
+  font-family: serif;
+}
+
+@media (min-width: 500px) {
+  .Orders {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 1rem;
+    justify-content: space-evenly;
+  }
+
+  .Orders h3 {
+    font-size: 1.7rem;
+  }
+
+  .Orders .Ingredients {
+    width: 85%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+  }
+
+  .Orders .Ingredients h4 {
+    align-self: flex-start;
+    font-size: 1.5rem;
+    margin: auto 0;
+  }
+
+  .Orders .Ingredients ul {
+    width: 50%;
+    max-width: 60%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+
+    margin: auto;
+    padding: 0;
+  }
+
+  .Orders .Ingredients ul li > span {
+    font-size: 1.2rem;
+  }
+
+  .Orders .Price {
+    align-self: flex-end;
+    font-size: 1.4rem;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 605px) {
+  .Orders .Ingredients ul {
+    width: 50%;
+    max-width: 60%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+
+    margin: auto;
+    padding: 0;
+  }
+
+  .Orders .Ingredients ul li {
+    margin-bottom: 0;
+  }
+}
