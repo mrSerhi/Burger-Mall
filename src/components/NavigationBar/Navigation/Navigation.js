@@ -13,11 +13,11 @@ const navigation = () => {
         <NavItems exact path="/">
           <i className="fas fa-hamburger" /> Burger
         </NavItems>
-        <NavItems path="/orders/checkout">
+        {/* <NavItems path="/orders/checkout">
           Checkout <i className="fas fa-clipboard-check" />
-        </NavItems>
+        </NavItems> */}
         <NavItems path="/orders/orders_busket">
-          Busket <i className="fas fa-shopping-bag" />
+          Orders <i className="fas fa-shopping-bag" />
         </NavItems>
       </ul>
     </nav>
