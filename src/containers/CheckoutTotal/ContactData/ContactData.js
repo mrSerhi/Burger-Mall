@@ -5,7 +5,7 @@ import axios from "../../../axios-orders";
 
 import classes from "./ContactData.module.css";
 
-const ContactData = ({ isValidating, isSubmitting }) => {
+const ContactData = ({ values, isValidating, isSubmitting }) => {
   return (
     <div className={classes.ContactData}>
       <div className={classes.Form}>
@@ -31,6 +31,15 @@ const ContactData = ({ isValidating, isSubmitting }) => {
           <Field type="text" name="address" placeholder="Address" />
           <ErrorMessage component="span" name="address" />
 
+          <label style={{ display: "block" }}>
+            <Field
+              type="checkbox"
+              name="fastDelivery"
+              checked={values.delivery}
+            />
+            Fast Delivery
+          </label>
+
           <button type="submit" disabled={isValidating && isSubmitting}>
             Lets Go!
           </button>
@@ -41,14 +50,22 @@ const ContactData = ({ isValidating, isSubmitting }) => {
 };
 
 export default withFormik({
-  mapPropsToValues({ fullname, email, zipcode, country, address }) {
+  mapPropsToValues({
+    fullname,
+    email,
+    zipcode,
+    country,
+    address,
+    fastDelivery
+  }) {
     // should return obj where key is name of input field
     return {
       fullname: fullname || "",
       email: email || "",
       zipcode: zipcode || "",
       country: country || "ukraine",
-      address: address || ""
+      address: address || "",
+      fastDelivery: fastDelivery || false
     };
   },
   // validation rules
@@ -70,7 +87,8 @@ export default withFormik({
     address: yup
       .string()
       .trim()
-      .required("Addred is required!")
+      .required("Addred is required!"),
+    delivery: yup.boolean()
   }),
   async handleSubmit(
     values,
@@ -87,7 +105,7 @@ export default withFormik({
     };
     // push data to the server
     await axios.post("/orders.json", data);
-    // when push to the server -> clean form fields
+    // clean form fields
     resetForm();
     // back to home page
     history.push("/");

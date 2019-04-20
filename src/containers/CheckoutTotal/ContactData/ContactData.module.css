@@ -54,6 +54,11 @@
   resize: none;
   overflow: hidden;
 }
+
+.Form input[type="checkbox"] {
+  margin: 1rem auto;
+}
+
 .Form input[type="button"],
 .Form input[type="submit"],
 .Form button[type="submit"] {
