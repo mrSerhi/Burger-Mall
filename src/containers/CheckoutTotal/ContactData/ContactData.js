@@ -1,80 +1,95 @@
-import React, { Component } from "react";
+import React from "react";
+import { withFormik, Form, Field, ErrorMessage } from "formik";
+import * as yup from "yup";
 import axios from "../../../axios-orders";
-import PropTypes from "prop-types";
 
 import classes from "./ContactData.module.css";
-import Spinner from "../../../components/UIelements/Spinner/Spinner";
 
-class ContactData extends Component {
-  state = {
-    customer: {
-      name: "",
-      address: {
-        country: "",
-        zipcode: "",
-        street: ""
-      },
-      email: ""
-    },
-    loading: false
-  };
-  // submiting to the server
-  handleSubmiting = async e => {
-    e.preventDefault();
-    // setup loading state
-    this.setState({ loading: true });
-    // should get the ingredients and totalPrice
-    const { ingredients, totalPrice } = this.props;
-    // ingredients, totalPrice, customer -> {}
-    const data = {
-      ingredients,
-      totalPrice
-    };
+const ContactData = ({ isValidating, isSubmitting }) => {
+  return (
+    <div className={classes.ContactData}>
+      <div className={classes.Form}>
+        <h2>Client Form</h2>
 
-    // pushing to the server
-    try {
-      await axios.post("/orders.json", data);
-      this.setState({ loading: false });
-      // redirection to the home page
-      this.props.history.push("/");
-    } catch (ex) {
-      this.setState({ loading: false });
-      console.error("Response is failed...", ex);
-    }
-  };
+        <Form>
+          <Field type="text" name="fullname" placeholder="Fullname" />
+          <ErrorMessage component="span" name="fullname" />
 
-  // rendering React Elements
-  renderingForm = () => {
-    if (this.state.loading) return <Spinner />;
+          <Field type="email" name="email" placeholder="Email" />
+          <ErrorMessage component="span" name="email" />
 
-    return (
-      <form onSubmit={this.handleSubmiting}>
-        <input type="text" name="fullname" placeholder="Fullname" />
-        <input type="email" name="email" placeholder="Email" />
-        <input type="text" name="zipcode" placeholder="Zip-code" />
-        <input type="text" name="country" placeholder="Country" />
-        <input type="text" name="street" placeholder="Street" />
+          <Field type="text" name="zipcode" placeholder="Zip-code" />
+          <ErrorMessage component="span" name="zipcode" />
 
-        <button type="submit">Lets Go!</button>
-      </form>
-    );
-  };
+          <Field component="select" name="country">
+            <option value="ukraine">Ukraine</option>
+            <option value="usa">USA</option>
+            <option value="germany">Germany</option>
+            <option value="polish">Polish</option>
+          </Field>
 
-  render() {
-    return (
-      <div className={classes.ContactData}>
-        <div className={classes.Form}>
-          <h2>Client Form</h2>
-          {this.renderingForm()}
-        </div>
+          <Field type="text" name="address" placeholder="Address" />
+          <ErrorMessage component="span" name="address" />
+
+          <button type="submit" disabled={isValidating && isSubmitting}>
+            Lets Go!
+          </button>
+        </Form>
       </div>
-    );
-  }
-}
-
-ContactData.propTypes = {
-  ingredients: PropTypes.object,
-  totalPrice: PropTypes.number
+    </div>
+  );
 };
 
-export default ContactData;
+export default withFormik({
+  mapPropsToValues({ fullname, email, zipcode, country, address }) {
+    // should return obj where key is name of input field
+    return {
+      fullname: fullname || "",
+      email: email || "",
+      zipcode: zipcode || "",
+      country: country || "ukraine",
+      address: address || ""
+    };
+  },
+  // validation rules
+  validationSchema: yup.object().shape({
+    fullname: yup
+      .string()
+      .lowercase()
+      .required("Fullname is required!"),
+    email: yup
+      .string()
+      .email("Please type a valid email address")
+      .required("Email is required!"),
+    zipcode: yup
+      .string()
+      .matches(/^\d+$/, "Please type numbers")
+      .length(6, "Zipcode must be equals 6 digits")
+      .required("Zipcode is required!"),
+    country: yup.string(),
+    address: yup
+      .string()
+      .trim()
+      .required("Addred is required!")
+  }),
+  async handleSubmit(
+    values,
+    {
+      props: { ingredients, totalPrice, history }, // contains all props from wrappedComponent
+      resetForm
+    }
+  ) {
+    // comparing received data
+    const data = {
+      ingredients,
+      totalPrice,
+      customer: { ...values }
+    };
+    // push data to the server
+    await axios.post("/orders.json", data);
+    // when push to the server -> clean form fields
+    resetForm();
+    // back to home page
+    history.push("/");
+  }
+})(ContactData);
